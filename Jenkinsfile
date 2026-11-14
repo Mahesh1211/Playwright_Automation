@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    triggers {
+        cron('H/30 * * * *')
+    }
+
     stages {
 
         stage('Install Dependencies') {
@@ -15,9 +19,9 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
+        stage('Run Login Test') {
             steps {
-                bat 'npx playwright test'
+                bat 'npx playwright test tests/login.spec.ts'
             }
         }
     }
